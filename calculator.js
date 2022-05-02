@@ -13,7 +13,7 @@ Hint: We need:
 
       let total = 0;
       let strbuffer = "0";
-      let operator = "";
+      let operator = null;
 
       /*  FUNC DESCRIPTION: Operator calculations. Create the in +, x, -, and ÷ operator calculations. The plus operator is done for you!
           Uncomment and fill in the blank spaces. */
@@ -58,9 +58,10 @@ Hint: We need:
           }
           if (symbol === "←") {
               strbuffer = strbuffer.substring(0, strbuffer.length - 1)
+              total = parseInt(strbuffer);
           }
           if (symbol === "=") {
-              strbuffer = total;
+              strbuffer = total.toString();
           }
           else { //make functionality if symbol is an operator
           const intBuffer = parseInt(strbuffer);
@@ -69,8 +70,8 @@ Hint: We need:
           } else {
               calculations();
           }
-          operator = "";
-          strbuffer = total;
+          operator = symbol;
+          strbuffer = total.toString();
           }
       }
 
@@ -78,24 +79,32 @@ Hint: We need:
           This is where we sense when a user clicks a certain button and send this information to our buttonClicked function. */
       function setListeners() {
       //Hint: We want to select all buttons from html and make it so that something happens when you click on the buttons! querySelectorAll might be helpful
-          let ______ = document.________(________); 
-          for (item of ________) {
+          let button = document.querySelectorAll('.buttons'); 
+          for (item of button) {
           //Hint: addEventListener might be useful.
           //Hint: event.target.innerText might be helpful. innerText return type is a string
+            item.addEventListener('click', function () {
+                buttonClicked(item.textContent);
+            });
           }
       }
 
       //Make sure to call setListeners!!!
       setListeners();
+      document.querySelector('.result-screen').innerHTML = "";
 
       /*  FUNC DESCRIPTION: Now we will write the function that takes care of when a button is clicked. */
       function buttonClicked(valueClicked) {
+          strbuffer = valueClicked.toString();
           if (isNaN(parseInt(valueClicked))) { //NaN means "Not a Number"
               //Hint: call a function we just created!
-              
+              makesSymbol(valueClicked);
+              document.querySelector('.result-screen').innerHTML += "";
           } else {
               //Hint: call a function we just created!
+              makesNumber(valueClicked);
+              document.querySelector('.result-screen').innerHTML += strbuffer;
           }
-          ______________________ = ___________;
+          document.querySelector('.result-screen').innerHTML += strbuffer;
       // Hint: we need to change what number appears on the screen! to change html, one listener you could use is querySelector
       }

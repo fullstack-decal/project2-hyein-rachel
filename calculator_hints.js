@@ -10,38 +10,29 @@ Hint: We need:
       (2) the string value that is shown on the display screen
       (3) the operator (+, x, -, and ÷) that is selected.  */
 
-      let total = 0;
-      let strbuffer = "0";
-      let operator = "";
+      let total = ________;
+      let strbuffer = ________;
+      let operator = _______;
 
       /*  FUNC DESCRIPTION: Operator calculations. Create the in +, x, -, and ÷ operator calculations. The plus operator is done for you!
           Uncomment and fill in the blank spaces. */
       function calculations() {
-          const intBuffer = parseInt(strbuffer); // Hint: Use parseInt to convert string to integer
+          const intBuffer = _________; // Hint: Use parseInt to convert string to integer
           if (operator === "+") {
               total += intBuffer;
           }
           //ADD THE OTHER OPERATORS
-          if (operator === "-") {
-              total -= intBuffer;
-          }
-          if (operator === "x") {
-              total = total * intBuffer;
-          }
-          if (operator === "÷") {
-              total = total / intBuffer;
-          }
       }
 
       /*   FUNC DESCRIPTION: If user input is a number, create the function. */
       function makesNumber(value) {
           if (strbuffer === "0") {
-              strbuffer = value;
+              strbuffer = _______;
           } else {
           /*  If strbuffer is not 0, meaning there is a previous number typed in already, what should we display on the screen?
           Hint: How do we concatenate strings? If you are stuck, imagine typing in a "5" into the calculator, making strbuffer into "5". 
           Then imagine typing "3" into the calculator. Now "3" is value and strbuffer is still at "5", so strbuffer will now be 53.  */
-              strbuffer = strbuffer * 10 + value
+              ____________________
           }
       }
 
@@ -51,25 +42,16 @@ Hint: We need:
           //make functionality for symbol C
           //make functionality for symbol ← Hint: .substring might be helpful! 
           //make functionality for symbol = Hint: use operator variable. Also call a function we created already!
-          if (symbol === "C") {
-              strbuffer = "0";
-              total = 0;
-          }
-          if (symbol === "←") {
-              strbuffer = strbuffer.substring(0, strbuffer.length - 1)
-          }
-          if (symbol === "=") {
-              strbuffer = total;
-          }
+          ...
           else { //make functionality if symbol is an operator
           const intBuffer = parseInt(strbuffer);
           if (total === 0) {
-              total = intBuffer;
+              ____________;
           } else {
-              calculations();
+              ____________;
           }
-          operator = "";
-          strbuffer = total;
+          operator = ______;
+          strbuffer = _____;
           }
       }
 
