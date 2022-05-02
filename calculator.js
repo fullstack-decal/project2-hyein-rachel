@@ -13,7 +13,7 @@ Hint: We need:
 
       let total = 0;
       let strbuffer = "0";
-      let operator = null;
+      let operator = "";
 
       /*  FUNC DESCRIPTION: Operator calculations. Create the in +, x, -, and ÷ operator calculations. The plus operator is done for you!
           Uncomment and fill in the blank spaces. */
@@ -32,17 +32,21 @@ Hint: We need:
           if (operator === "÷") {
               total = total / intBuffer;
           }
+          strbuffer = total;
       }
 
       /*   FUNC DESCRIPTION: If user input is a number, create the function. */
       function makesNumber(value) {
           if (strbuffer === "0") {
               strbuffer = value;
+              total = strbuffer;
           } else {
           /*  If strbuffer is not 0, meaning there is a previous number typed in already, what should we display on the screen?
           Hint: How do we concatenate strings? If you are stuck, imagine typing in a "5" into the calculator, making strbuffer into "5". 
           Then imagine typing "3" into the calculator. Now "3" is value and strbuffer is still at "5", so strbuffer will now be 53.  */
-              strbuffer = strbuffer * 10 + value
+              intbuffer = parseInt(strbuffer) * 10 + parseInt(value);
+              strbuffer = intbuffer.toString();
+              total = strbuffer;
           }
       }
 
@@ -61,17 +65,18 @@ Hint: We need:
               total = parseInt(strbuffer);
           }
           if (symbol === "=") {
+              calculations();
               strbuffer = total.toString();
           }
           else { //make functionality if symbol is an operator
-          const intBuffer = parseInt(strbuffer);
-          if (total === 0) {
-              total = intBuffer;
-          } else {
-              calculations();
-          }
-          operator = symbol;
-          strbuffer = total.toString();
+            const intBuffer = parseInt(strbuffer);
+            operator = symbol;
+            if (total === 0) {
+                total = intBuffer;
+            } else {
+                calculations();
+            } 
+            strbuffer = total.toString();
           }
       }
 
@@ -79,13 +84,11 @@ Hint: We need:
           This is where we sense when a user clicks a certain button and send this information to our buttonClicked function. */
       function setListeners() {
       //Hint: We want to select all buttons from html and make it so that something happens when you click on the buttons! querySelectorAll might be helpful
-          let button = document.querySelectorAll('.buttons'); 
-          for (item of button) {
+          let bList = document.querySelectorAll(".buttons"); 
+          for (let i = 0; i < bList.length; i++) {
           //Hint: addEventListener might be useful.
           //Hint: event.target.innerText might be helpful. innerText return type is a string
-            item.addEventListener('click', function () {
-                buttonClicked(item.textContent);
-            });
+            bList[i].addEventListener('click', function() {buttonClicked(bList[i].innerHTML)});
           }
       }
 
@@ -95,16 +98,18 @@ Hint: We need:
 
       /*  FUNC DESCRIPTION: Now we will write the function that takes care of when a button is clicked. */
       function buttonClicked(valueClicked) {
-          strbuffer = valueClicked.toString();
           if (isNaN(parseInt(valueClicked))) { //NaN means "Not a Number"
               //Hint: call a function we just created!
               makesSymbol(valueClicked);
-              document.querySelector('.result-screen').innerHTML += "";
+              if (valueClicked === "=") {
+                document.querySelector('.result-screen').innerHTML = strbuffer;
+              } else {
+                  document.querySelector('.result-screen').innerHTML = "0";
+              }
           } else {
               //Hint: call a function we just created!
               makesNumber(valueClicked);
-              document.querySelector('.result-screen').innerHTML += strbuffer;
+              document.querySelector('.result-screen').innerHTML += valueClicked;
           }
-          document.querySelector('.result-screen').innerHTML += strbuffer;
       // Hint: we need to change what number appears on the screen! to change html, one listener you could use is querySelector
       }
